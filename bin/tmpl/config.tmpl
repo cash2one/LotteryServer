@@ -1,0 +1,47 @@
+<html>
+<head><title></title></head>
+<body>
+	<script language="javascript" type="text/javascript">
+        function IsNum(e) {
+            var k = window.event ? e.keyCode : e.which;
+            if (((k >= 48) && (k <= 57)) || k == 8 || k == 0) {
+            } else {
+                if (window.event) {
+                    window.event.returnValue = false;
+                }
+                else {
+                    e.preventDefault(); //for firefox 
+                }
+            }
+        }
+    </script>
+    <form action="{{.LocalHttpURL}}/admin/config" method="post">
+        返奖率：<input type="text" name="returnRate" value="{{.ReturnRate}}" onkeypress="return IsNum(event)">
+		期望中奖率：<input type="text" name="expectedRate" value="{{.ExpectedRate}}" onkeypress="return IsNum(event)">
+		单注积分：<input type="text" name="SingleBettingScore" value="{{.SingleBettingScore}}" onkeypress="return IsNum(event)">
+		最高下注数量：<input type="text" name="MaxBettingNum" value="{{.MaxBettingScore}}" onkeypress="return IsNum(event)">
+		单注分数1：<input type="text" name="RewardScore1" value="{{.RewardScore1}}" onkeypress="return IsNum(event)">
+		奖励数量2：<input type="text" name="RewardNum2" value="{{.RewardNum2}}" onkeypress="return IsNum(event)">
+		单注分数2：<input type="text" name="RewardScore2" value="{{.RewardScore2}}" onkeypress="return IsNum(event)">
+		奖励数量3：<input type="text" name="RewardNum3" value="{{.RewardNum3}}" onkeypress="return IsNum(event)">
+		单注分数3：<input type="text" name="RewardScore3" value="{{.RewardScore3}}" onkeypress="return IsNum(event)">
+		奖励数量4：<input type="text" name="RewardNum4" value="{{.RewardNum4}}" onkeypress="return IsNum(event)">
+		单注分数4：<input type="text" name="RewardScore4" value="{{.RewardScore4}}" onkeypress="return IsNum(event)">
+		奖励数量5：<input type="text" name="RewardNum5" value="{{.RewardNum5}}" onkeypress="return IsNum(event)">
+		单注分数5：<input type="text" name="RewardScore5" value="{{.RewardScore5}}" onkeypress="return IsNum(event)">
+		
+        <input type="submit" value="提交">
+    </form>
+	<pre>返奖率：{{.ReturnRate}}										期望中奖率:{{.ExpectedRate}}</pre><br/>
+	<pre>单注积分：{{.SingleBettingScore}}								最高下注数量:{{.MaxBettingScore}}</pre><br/>
+	<pre>单注分数0：{{.RewardScore0}}									奖励数量0:{{.RewardNum0}}</pre><br/>
+	<pre>单注分数1：{{.RewardScore1}}									奖励数量1:{{.RewardNum1}}</pre><br/>
+	<pre>单注分数2：{{.RewardScore2}}									奖励数量2:{{.RewardNum2}}</pre><br/>
+	<pre>单注分数3：{{.RewardScore3}}									奖励数量3:{{.RewardNum3}}</pre><br/>
+	<pre>单注分数4：{{.RewardScore4}}									奖励数量4:{{.RewardNum4}}</pre><br/>
+	<pre>单注分数5：{{.RewardScore5}}									奖励数量5:{{.RewardNum5}}</pre><br/>
+	<pre>实际中奖率：{{.CurrentWinRate}}				</pre><br/>
+</body>
+	
+</html>
+
