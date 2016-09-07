@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<title>数据查询</title>
+
+
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/laydate.js"></script>
+<style>
+html{
+	background-color: #E3E3E3;
+	font-size: 14px;
+	color: #000;
+	font-family: '微软雅黑';
+	bottom: auto;
+}
+h2{line-height:30px; font-size:20px;}
+a,a:hover{ text-decoration:none;}
+pre{font-family:'微软雅黑'}
+.box{width:970px; padding:10px 20px; background-color:#fff; margin:10px auto;}
+.box a{padding-right:20px;}
+</style>
+</head>
+<body>
+<div id="setInfo" align="center" style="width:970px; margin:10px auto;">
+  开始日：
+    <input class="laydate-icon" id="start" value="test">
+    结束日：<input class="laydate-icon" id="end" value="test">
+
+    <select name="selectType" >
+    	<option value="1" style="width:200px;margin:10px auto">请指定筛选条件</option>
+        <option value="2"style="width:200px;margin:10px auto">用户卡号</option>
+        <option value="3"style="width:200px;margin:10px auto">USERID</option>        
+    </select>
+    
+    卡号<input id="idValue" type="text">
+    <input  type="button" onClick="onComplet()" value="查询"> 
+    <input type="button" onClick=" onClick=location.href='{{.LocalHttpURL}}/admin/config'" value="切换至设置界面">
+</div>
+<div id="infoContiner" align="center"  style="width:970px; margin:10px auto;">
+	<table align="center" width="900" cellpadding="2" cellspacing="2">
+    <tr align="center">
+    	<td align="center" width="900/6"><h3>操作时间</h3></td>
+        <td align="center" width="900/6"><h3>卡号</h3></td>
+        <td align="center" width="900/6"><h3>USERID</h3></td>
+        <td align="center" width="900/6"><h3>使用积分</h3></td>
+        <td align="center" width="900/6"><h3>中奖积分</h3></td>
+        <td align="center" width="900/6"><h3>中奖赔率</h3></td>
+    </tr>
+    </table>   
+
+</div>
+<div id="page" align="center"  style="width: 970px; margin: 10px auto; line-stacking: 30;">
+	 <input type="button" onclick="onPrev()" value="上一页" />
+     <input  id="pageInfo" type="text" width="50" value="页码" />
+     <input type="button" onclick="onNext()" value="下一页" />
+</div>
+<div id="page" align="center"  style="width: 970px; margin: 10px auto; line-stacking: 30;">
+    <table align="center" id="infoTable" width="900" cellpadding="2" cellspacing="2">
+        <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+            <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+                <tr align="center">
+    	<td align="center" width="900/6">操作时间</td>
+        <td align="center" width="900/6">卡号</td>
+        <td align="center" width="900/6">USERID</td>
+        <td align="center" width="900/6">使用积分</td>
+        <td align="center" width="900/6">中奖积分</td>
+        <td align="center" width="900/6">中奖赔率</td>
+    </tr>
+    </table>
+</div>
+<script>
+var start = {
+    elem: '#start',
+    format: 'YYYY-MM-DD hh:mm:ss',
+    //min: laydate.now(), //设定最小日期为当前日期
+    max: '2099-06-16 23:59:59', //最大日期
+    istime: true,
+    istoday: true,
+    choose: function(datas){
+         end.min = datas; //开始日选好后，重置结束日的最小日期
+         end.start = datas //将结束日的初始值设定为开始日
+    }
+};
+var end = {
+    elem: '#end',
+    format: 'YYYY-MM-DD hh:mm:ss',
+    min: laydate.now(),
+    max: '2099-06-16 23:59:59',
+    istime: true,
+    istoday: true,
+    choose: function(datas){
+        start.max = datas; //结束日选好后，重置开始日的最大日期
+    }
+};
+laydate(start);
+laydate(end);
+if(document.getElementById("start").value=="test")
+	document.getElementById("start").value=laydate.now()+" 00:00:00";
+if(document.getElementById("end").value=="test")
+	document.getElementById("end").value=laydate.now()+" 23:59:59";
+
+//查询提交方法
+function onComplet(){
+	var type=document.getElementsByName("selectType").item(0).value;
+	var stratTimer=document.getElementById("start").value;
+	var endTimer=document.getElementById("end").value;
+	var cardID=document.getElementById("idValue").value;
+	if(cardID=="")
+		cardID=0;
+				
+	//alert(stratTimer+"|"+endTimer+"|"+type+"|"+cardID+"|"+count);		
+// 调用       
+$.post("{{.LocalHttpURL}}/admin/query",{"type":type,"begindate":stratTimer,"enddate":endTimer,"queryid":cardID},function(data){addInfos(data)},"json");
+
+/*var data={"data":[{"cardID":"02000024","costScore":10,"opera_time":"2016-08-05 17:39:19","rewardRate":0,"rewardScore":0,"userID":"0200002400008"},{"cardID":"02000024","costScore":10,"opera_time":"2016-08-05 17:39:23","rewardRate":0,"rewardScore":0,"userID":"0200002400008"},{"cardID":"02000024","costScore":10,"opera_time":"2016-08-05 17:39:27","rewardRate":0,"rewardScore":0,"userID":"0200002400008"},{"cardID":"02000024","costScore":10,"opera_time":"2016-08-05 17:39:31","rewardRate":0,"rewardScore":0,"userID":"0200002400008"},{"cardID":"02000024","costScore":10,"opera_time":"2016-08-05 17:39:37","rewardRate":0,"rewardScore":10,"userID":"0200002400008"}]};
+
+addInfos(data);*/
+};
+
+var page=0;
+var pageIndex=0;
+var pageCount=30;
+var maxCount=0;
+var datas=null;
+showPage();
+
+function showPage()
+{
+	document.getElementById("pageInfo").value=(pageIndex+1)+"/"+(page+1);
+	var tb=document.getElementById("infoTable");	
+	/*for(var i=0;i<pageCount;i++)
+	{	
+		if(i+pageIndex*pageCount>=maxCount)
+			break;
+		var row=document.createElement("tr"); //创建行
+		var infodata=[datas[i+pageIndex*pageCount].opera_time,
+		datas[i+pageIndex*pageCount].cardID,
+		datas[i+pageIndex*pageCount].userID,
+		datas[i+pageIndex*pageCount].costScore,
+		datas[i+pageIndex*pageCount].rewardScore,
+		datas[i+pageIndex*pageCount].rewardRate+"%"];
+		for(var j=0;j<6;j++){
+			var td1=document.createElement("td"); //创建单元格
+			td1.align="center";
+			td1.width=width="900/6";
+			td1.height=30; 
+			td1.appendChild(document.createTextNode(infodata[j])); //为单元格			添加内容 
+			row.appendChild(td1); //将单元格添加到行内
+		} 
+		tb.appendChild(row); //将行添加到<tbody>中 	
+	};*/
+	for(var i=0;i<pageCount;i++)
+	{
+		var row=tb.rows[i];
+		var infodata;
+		if(i+pageIndex*pageCount>=maxCount){
+			infodata=["","","","","",""];
+		}else
+		{	
+			infodata=[datas[i+pageIndex*pageCount].opera_time,
+			datas[i+pageIndex*pageCount].cardID,
+			datas[i+pageIndex*pageCount].userID,
+			datas[i+pageIndex*pageCount].costScore,
+			datas[i+pageIndex*pageCount].rewardScore,
+			datas[i+pageIndex*pageCount].rewardRate+"%"];
+		}
+		for(var j=0;j<6;j++){
+			 var td=row.cells[j];
+			 td.innerHTML=infodata[j];
+		}
+	}
+}
+
+function onPrev()
+{
+	if(pageIndex>0){
+		pageIndex-=1;
+		showPage();
+	}
+}
+
+function onNext()
+{
+	if(pageIndex<page){
+		pageIndex+=1;
+		showPage();
+	}
+}
+
+function addInfos(data){
+	//alert(data.data);	
+	if((data)==undefined ||(data)== null)
+		return;
+	if(data){
+		datas=data.data;
+		if((datas)==null)
+			return;	
+		maxCount=datas.length;
+		pageCount=30;
+		page=Math.ceil(maxCount/pageCount);
+		pageIndex=0;
+		showPage();
+	}
+}
+</script>
+</body>
+</html>
